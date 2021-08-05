@@ -18,11 +18,14 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 mongoose.connect("mongodb://localhost:27017/blogDB",{useNewUrlParser: true, useUnifiedTopology: true});
-
+// let posts = [];
 const postSchema={
 title:String,
 content:String
 };
+
+const Post = mongoose.model("Post",postSchema);
+//////Changes to be done
 
 app.get("/", function(req, res){
   res.render("home", {
