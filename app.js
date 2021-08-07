@@ -62,20 +62,21 @@ app.post("/compose", function(req, res){
 });
 
 
+app.get("/posts/:postId", function(req, res){
+  const requestedPostId = req.params.postId;
+  const requestedTitle = _.lowerCase(req.params.postName);
 
-app.get("/post/:topic", function(req,res){
-const requestedTitle = _.lowerCase(req.params.topic);
-posts.forEach(function(p){
-  const storedTitle= _.lowerCase(p.title);
-  if(requestedTitle===storedTitle){
-    res.render("post",{
-      Title:p.title,
-      Content:p.content
-    })
-  }
-});
+  Post.findOne({_id: requestedPostId}, function(err, post){
 
-});
+   res.render("post", {
+
+     title: post.title,
+
+     content: post.content
+
+   });
+
+ });
 
 
 
